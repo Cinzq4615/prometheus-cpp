@@ -17,6 +17,11 @@ add_library(core
   src/text_serializer.cc
 )
 
+generate_export_header(core
+  EXPORT_FILE_NAME include/prometheus/core_export.h
+  PREFIX_NAME PROMETHEUS_CPP_
+)
+
 add_library(${PROJECT_NAME}::core ALIAS core)
 
 target_link_libraries(core
@@ -28,6 +33,7 @@ target_link_libraries(core
 target_include_directories(core
   PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
 )
 
 set_target_properties(core PROPERTIES OUTPUT_NAME ${PROJECT_NAME}-core)
